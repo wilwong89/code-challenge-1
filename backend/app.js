@@ -4,7 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-require('dotenv').config()
+require("dotenv").config();
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -48,7 +48,6 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-
 mongoose
   .connect(
     `mongodb+srv://admin:${process.env.DB_PASS}@${process.env.DB_ADDRESS}/${process.env.DB_NAME}?retryWrites=true&w=majority`
@@ -59,3 +58,9 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+console.log;
+console.log("=================");
+console.log("env", process.env.GOOGLE_API_KEY);
+console.log("=================");
+console.log;
