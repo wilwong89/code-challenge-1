@@ -4,6 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
@@ -49,7 +50,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    `mongodb+srv://<username>:<password>@c<mongodb_service>/<dataabaseName>?retryWrites=true&w=majority`
+    `mongodb+srv://admin:${process.env.DB_PASS}@${process.env.DB_ADDRESS}/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() => {
     app.listen(5000);
@@ -57,3 +58,9 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+console.log;
+console.log("=================");
+console.log("env", process.env.GOOGLE_API_KEY);
+console.log("=================");
+console.log;
