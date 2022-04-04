@@ -70,7 +70,7 @@ const createPlace = async (req, res, next) => {
     );
   }
 
-  const { title, description, address } = req.body;
+  const { title, description, address, category } = req.body;
 
   let coordinates;
   try {
@@ -83,6 +83,7 @@ const createPlace = async (req, res, next) => {
     title,
     description,
     address,
+    category,
     location: coordinates,
     image: req.file.path,
     creator: req.userData.userId
@@ -132,7 +133,7 @@ const updatePlace = async (req, res, next) => {
     );
   }
 
-  const { title, description } = req.body;
+  const { title, description, category } = req.body;
   const placeId = req.params.pid;
 
   let place;
@@ -153,6 +154,7 @@ const updatePlace = async (req, res, next) => {
 
   place.title = title;
   place.description = description;
+  place.category = category;
 
   try {
     await place.save();

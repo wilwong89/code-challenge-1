@@ -6,6 +6,7 @@ import Button from '../../shared/components/FormElements/Button';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ImageUpload from '../../shared/components/FormElements/ImageUpload';
+import Dropdown from '../../shared/components/FormElements/Dropdown';
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
@@ -13,6 +14,7 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
+import { placeCategories } from '../../shared/config/constants';
 import './PlaceForm.css';
 
 const NewPlace = () => {
@@ -48,6 +50,7 @@ const NewPlace = () => {
       const formData = new FormData();
       formData.append('title', formState.inputs.title.value);
       formData.append('description', formState.inputs.description.value);
+      formData.append('category', formState.inputs.category.value);
       formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
       await sendRequest('http://localhost:5000/api/places', 'POST', formData, {
@@ -77,6 +80,13 @@ const NewPlace = () => {
           label="Description"
           validators={[VALIDATOR_MINLENGTH(5)]}
           errorText="Please enter a valid description (at least 5 characters)."
+          onInput={inputHandler}
+        />
+        <Dropdown
+          id="category"
+          label="Place Category"
+          options={placeCategories}
+          errorText="Please enter a category."
           onInput={inputHandler}
         />
         <Input

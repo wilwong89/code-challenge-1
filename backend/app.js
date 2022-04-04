@@ -58,9 +58,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-console.log;
-console.log("=================");
-console.log("env", process.env.GOOGLE_API_KEY);
-console.log("=================");
-console.log;
