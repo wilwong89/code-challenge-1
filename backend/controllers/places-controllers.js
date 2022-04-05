@@ -106,8 +106,6 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  console.log(user);
-
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -243,7 +241,6 @@ const getAllPlaces = async (req, res, next) => {
     const error = new HttpError('No results for this page', 404);
     return next(error);
   }
-  console.log('placesArray', placesArray);
   res.json({ places: placesArray });
 };
 

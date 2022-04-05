@@ -7,6 +7,7 @@ import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import PageChanger from '../components/PageChanger';
 
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import { API_URL } from '../../shared/config/constants';
 
 const AllPlaces = () => {
   const [loadedPlaces, setLoadedPlaces] = useState();
@@ -20,7 +21,7 @@ const AllPlaces = () => {
       try {
         let queryString = page ? `?page=${page}` : '';
         const responseData = await sendRequest(
-          `http://localhost:5000/api/places/${queryString}`
+          `${API_URL}/api/places/${queryString}`
         );
         setLoadedPlaces(responseData.places);
       } catch (err) {
