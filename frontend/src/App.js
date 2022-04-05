@@ -30,14 +30,14 @@ const App = () => {
         <Route path="/:userId/places" exact>
           <UserPlaces />
         </Route>
-        <Route path="/places" exact>
-          <AllPlaces />
-        </Route>
-        <Route path="/places/:page" exact>
-          <AllPlaces />
-        </Route>
         <Route path="/places/new" exact>
           <NewPlace />
+        </Route>
+        <Route path="/allplaces/:page" exact>
+          <AllPlaces />
+        </Route>
+        <Route path="/allplaces" exact>
+          <AllPlaces />
         </Route>
         <Route path="/places/:placeId">
           <UpdatePlace />
@@ -51,10 +51,10 @@ const App = () => {
         <Route path="/" exact>
           <Users />
         </Route>
-        <Route path="/places" exact>
+        <Route path="/allplaces" exact>
           <AllPlaces />
         </Route>
-        <Route path="/places/:page" exact>
+        <Route path="/allplaces/:page" exact>
           <AllPlaces />
         </Route>
         <Route path="/:userId/places" exact>

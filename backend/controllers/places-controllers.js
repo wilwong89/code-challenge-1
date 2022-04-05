@@ -231,7 +231,7 @@ const getAllPlaces = async (req, res, next) => {
     placesArray = await Place.find()
       .limit(pageSize)
       .skip(Math.max(page - 1, 0) * pageSize)
-      .populate('creator', ['name', 'image']);
+      .populate('creator', ['name', 'image', '_id']);
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not find a place.',

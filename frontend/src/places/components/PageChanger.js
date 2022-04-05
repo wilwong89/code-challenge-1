@@ -8,7 +8,7 @@ const PageChanger = props => {
   const { handlePreviousPage, handleNextPage } = props;
 
   return (
-    <div className="place-list center">
+    <div className="place-list">
       <Card>
         {handlePreviousPage() && (
           <Link to={handlePreviousPage() || ''}>

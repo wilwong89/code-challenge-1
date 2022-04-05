@@ -15,7 +15,7 @@ const NavLinks = props => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={`/places`}>ALL PLACES</NavLink>
+        <NavLink to={`/allplaces`}>ALL PLACES</NavLink>
       </li>
       {auth.isLoggedIn && (
         <li>
@@ -24,7 +24,9 @@ const NavLinks = props => {
       )}
       {auth.isLoggedIn && (
         <li>
-          <NavLink to="/places/new">ADD PLACE</NavLink>
+          <NavLink exact to="/places/new">
+            ADD PLACE
+          </NavLink>
         </li>
       )}
       {!auth.isLoggedIn && (

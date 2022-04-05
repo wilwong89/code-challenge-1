@@ -23,7 +23,6 @@ const AllPlaces = () => {
           `http://localhost:5000/api/places/${queryString}`
         );
         setLoadedPlaces(responseData.places);
-        console.log(responseData.places);
       } catch (err) {
         setLoadedPlaces([]);
       }
@@ -38,7 +37,7 @@ const AllPlaces = () => {
   const handleNextPage = () => {
     const pageNum = page || 1;
     if (loadedPlaces && loadedPlaces.length) {
-      return `/places/${Number(pageNum) + 1}`;
+      return `/allplaces/${Number(pageNum) + 1}`;
     } else {
       return false;
     }
@@ -50,7 +49,7 @@ const AllPlaces = () => {
     if (pageNum < 1) {
       return false;
     } else {
-      return `/places/${pageNum}`;
+      return `/allplaces/${pageNum}`;
     }
   };
 

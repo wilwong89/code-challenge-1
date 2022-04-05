@@ -93,7 +93,7 @@ const PlaceItem = props => {
             <h3>{props.address}</h3>
             <p>{props.description}</p>
             <p>{props.category}</p>
-            {props.creator && <p>{props.creator.name}</p>}
+            {props.creatorName && <p>{props.creatorName}</p>}
           </div>
           <div className="place-item__actions">
             <Button inverse onClick={openMapHandler}>
