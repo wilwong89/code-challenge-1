@@ -7,6 +7,7 @@ const HttpError = require('../models/http-error');
 const getCoordsForAddress = require('../util/location');
 const Place = require('../models/place');
 const User = require('../models/user');
+const DEFAULT_PAGE_SIZE = 10;
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -220,8 +221,35 @@ const deletePlace = async (req, res, next) => {
   res.status(200).json({ message: 'Deleted place.' });
 };
 
+const getAllPlaces = async (req, res, next) => {
+  // const placeId = req.params.pid;
+  const page = Number(req.query?.page || 1);
+  const pageSize = Number(req.query?.pagesize || DEFAULT_PAGE_SIZE);
+
+  let placesArray;
+  try {
+    placesArray = await Place.find()
+      .limit(pageSize)
+      .skip(Math.max(page - 1, 0) * pageSize)
+      .populate('creator', ['name', 'image', '_id']);
+  } catch (err) {
+    const error = new HttpError(
+      'Something went wrong, could not find a place.',
+      500
+    );
+    return next(error);
+  }
+  if (!placesArray.length) {
+    const error = new HttpError('No results for this page', 404);
+    return next(error);
+  }
+  console.log('placesArray', placesArray);
+  res.json({ places: placesArray });
+};
+
 exports.getPlaceById = getPlaceById;
 exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
+exports.getAllPlaces = getAllPlaces;
