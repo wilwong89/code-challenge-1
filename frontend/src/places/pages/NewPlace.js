@@ -14,7 +14,7 @@ import {
 import { useForm } from '../../shared/hooks/form-hook';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import { AuthContext } from '../../shared/context/auth-context';
-import { placeCategories } from '../../shared/config/constants';
+import { placeCategories, API_URL } from '../../shared/config/constants';
 import './PlaceForm.css';
 
 const NewPlace = () => {
@@ -53,7 +53,7 @@ const NewPlace = () => {
       formData.append('category', formState.inputs.category.value);
       formData.append('address', formState.inputs.address.value);
       formData.append('image', formState.inputs.image.value);
-      await sendRequest('http://localhost:5000/api/places', 'POST', formData, {
+      await sendRequest(`${API_URL}/api/places`, 'POST', formData, {
         Authorization: 'Bearer ' + auth.token
       });
       history.push('/');

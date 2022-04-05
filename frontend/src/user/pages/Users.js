@@ -4,6 +4,7 @@ import UsersList from '../components/UsersList';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import { useHttpClient } from '../../shared/hooks/http-hook';
+import { API_URL } from '../../shared/config/constants';
 
 const Users = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -12,9 +13,7 @@ const Users = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const responseData = await sendRequest(
-          'http://localhost:5000/api/users'
-        );
+        const responseData = await sendRequest(`${API_URL}/api/users`);
 
         setLoadedUsers(responseData.users);
       } catch (err) {}
