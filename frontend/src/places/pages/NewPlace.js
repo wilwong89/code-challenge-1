@@ -30,6 +30,10 @@ const NewPlace = () => {
         value: '',
         isValid: false
       },
+      category: {
+        value: '',
+        isValid: false
+      },
       address: {
         value: '',
         isValid: false
