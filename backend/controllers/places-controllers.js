@@ -230,7 +230,8 @@ const getAllPlaces = async (req, res, next) => {
   try {
     placesArray = await Place.find()
       .limit(pageSize)
-      .skip(Math.max(page - 1, 0) * pageSize);
+      .skip(Math.max(page - 1, 0) * pageSize)
+      .populate('creator', ['name', 'image']);
   } catch (err) {
     const error = new HttpError(
       'Something went wrong, could not find a place.',
@@ -242,7 +243,7 @@ const getAllPlaces = async (req, res, next) => {
     const error = new HttpError('No results for this page', 404);
     return next(error);
   }
-
+  console.log('placesArray', placesArray);
   res.json({ places: placesArray });
 };
 
