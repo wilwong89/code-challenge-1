@@ -6,6 +6,8 @@ import Button from '../../shared/components/FormElements/Button';
 import Card from '../../shared/components/UIElements/Card';
 import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import Dropdown from '../../shared/components/FormElements/Dropdown';
+import { placeCategories } from '../../shared/config/constants';
 import {
   VALIDATOR_REQUIRE,
   VALIDATOR_MINLENGTH
@@ -33,6 +35,10 @@ const UpdatePlace = () => {
       description: {
         value: '',
         isValid: false
+      },
+      category: {
+        value: '',
+        isValid: false
       }
     },
     false
@@ -54,6 +60,10 @@ const UpdatePlace = () => {
             description: {
               value: responseData.place.description,
               isValid: true
+            },
+            category: {
+              value: responseData.place.category,
+              isValid: false
             }
           },
           true
@@ -71,7 +81,8 @@ const UpdatePlace = () => {
         'PATCH',
         JSON.stringify({
           title: formState.inputs.title.value,
-          description: formState.inputs.description.value
+          description: formState.inputs.description.value,
+          category: formState.inputs.category.value
         }),
         {
           'Content-Type': 'application/json',
@@ -124,6 +135,16 @@ const UpdatePlace = () => {
             errorText="Please enter a valid description (min. 5 characters)."
             onInput={inputHandler}
             initialValue={loadedPlace.description}
+            initialValid={true}
+          />
+          <Dropdown
+            id="category"
+            label="Place Category"
+            options={placeCategories}
+            errorText="Please enter a category."
+            validators={[VALIDATOR_REQUIRE()]}
+            onInput={inputHandler}
+            initialValue={loadedPlace.category}
             initialValid={true}
           />
           <Button type="submit" disabled={!formState.isValid}>
